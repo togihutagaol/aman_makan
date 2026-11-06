@@ -1,0 +1,133 @@
+/* ===== Aman Makan: tampilan ===== */
+:root{
+ --bg:#f5faf4;--card:#fff;--tx:#10302a;--mu:#587a6e;--pr:#0f6b4f;--on-pr:#fff;--pr2:#e3f2e8;--bd:#d7e7dc;--hd:#0f6b4f;--lem:#f4d35e;
+ --fd:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --fb:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+ --ease:cubic-bezier(.2,.8,.2,1);--pop:cubic-bezier(.3,1.6,.5,1);
+ color-scheme:light;box-sizing:border-box;
+ padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1914;--card:#14261e;--tx:#e4f2ea;--mu:#8fb0a2;--pr:#4cc79a;--on-pr:#06241a;--pr2:#1a382c;--bd:#254a3a;--hd:#14412f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c1914;--card:#14261e;--tx:#e4f2ea;--mu:#8fb0a2;--pr:#4cc79a;--on-pr:#06241a;--pr2:#1a382c;--bd:#254a3a;--hd:#14412f;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 var(--fb)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hd);z-index:10}
+
+/* Header: mengecil dan berbayang saat halaman digulir */
+header{background:var(--hd);color:#fff;padding:16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:env(safe-area-inset-top,0px);z-index:9;transition:padding .25s var(--ease),box-shadow .25s}
+header b{font:800 20px var(--fd);letter-spacing:-.01em}
+header small{display:block;font-size:12px;opacity:.85;max-height:20px;overflow:hidden;transition:opacity .2s,max-height .25s var(--ease)}
+header.sc{padding:9px 16px;box-shadow:0 6px 20px #0000002e}
+header.sc small{opacity:0;max-height:0}
+header button{background:#ffffff26;color:#fff;border:0;border-radius:10px;padding:7px 12px;font:600 12px var(--fb);cursor:pointer;transition:background .2s}
+
+main{max-width:640px;margin:0 auto;padding:16px 14px 100px}
+h2{font:700 21px/1.2 var(--fd);letter-spacing:-.01em;margin:6px 0 12px}
+h3{font:700 16px var(--fd);margin:0 0 6px}
+.mu{color:var(--mu);font-size:13px}
+a{color:var(--pr)}
+
+/* Kartu */
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 1px 2px #0f6b4f12}
+
+/* Hero beranda: satu momen khas dengan emoji melayang */
+.hero{position:relative;overflow:hidden;border-radius:22px;padding:22px 18px 20px;margin-bottom:14px;color:#fff;background:var(--hd)}
+.hero::after{content:"";position:absolute;right:-46px;top:-56px;width:180px;height:180px;border-radius:50%;background:var(--lem);opacity:.22}
+.hero h2{margin:0 0 4px;font-size:26px;color:#fff;position:relative;z-index:1}
+.hero p{margin:0;opacity:.92;position:relative;z-index:1;max-width:58%}
+.fl{position:absolute;z-index:1;font-style:normal;translate:0 calc(var(--sy,0) * -.18px);animation:bob 5s ease-in-out infinite;will-change:translate,transform}
+.f1{right:20px;top:16px;font-size:32px}
+.f2{right:72px;bottom:10px;font-size:26px;animation-delay:-1.6s}
+.f3{right:118px;top:30px;font-size:22px;animation-delay:-3.1s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(4deg)}}
+
+/* Menu utama */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.menu{--c:#2e9d5b;position:relative;background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px 12px 14px;color:var(--tx);font:600 14px var(--fb);text-align:center;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+.menu:nth-child(2){--c:#e0a800}.menu:nth-child(3){--c:#d64545}.menu:nth-child(4){--c:#2f7fd1}
+.menu span{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 8px;border-radius:50%;font-size:29px;background:color-mix(in srgb,var(--c) 18%,var(--card));transition:transform .35s var(--pop)}
+.menu:active{transform:scale(.97)}
+@media (hover:hover){
+ .menu:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 12px 26px color-mix(in srgb,var(--c) 24%,transparent)}
+ .menu:hover span{transform:scale(1.14) rotate(-8deg)}
+}
+
+/* Formulir */
+label{display:block;font-size:13px;font-weight:600;margin:12px 0 4px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--tx);font:inherit;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pr);box-shadow:0 0 0 3px color-mix(in srgb,var(--pr) 25%,transparent)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+
+/* Tombol */
+.btn{background:var(--pr);color:var(--on-pr);border:0;border-radius:12px;padding:12px 14px;width:100%;margin-top:12px;font:700 15px var(--fb);cursor:pointer;transition:transform .15s,box-shadow .2s,filter .2s,background .2s,color .2s}
+.btn:active{transform:scale(.98)}
+.btn.s{width:auto;margin:0;padding:7px 12px;font-size:12.5px;background:var(--pr2);color:var(--pr);border:1px solid var(--bd)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+@media (hover:hover){
+ .btn:not(.s):not(:disabled):hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 8px 18px color-mix(in srgb,var(--pr) 32%,transparent)}
+ .btn.s:not(:disabled):hover{background:var(--pr);color:var(--on-pr)}
+ header button:hover{background:#ffffff40}
+}
+
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:700;color:#fff}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+
+/* Pilihan kategori */
+.cats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cat{border:2px solid var(--bd);border-radius:12px;padding:9px;font:600 13px var(--fb);background:var(--bg);color:var(--tx);text-align:left;cursor:pointer;transition:border-color .2s,background .2s,transform .15s}
+.cat i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;transition:transform .3s var(--pop)}
+.cat.on{border-color:var(--pr);background:var(--pr2)}
+.cat.on i{transform:scale(1.35)}
+.cat:active{transform:scale(.97)}
+@media (hover:hover){.cat:hover{border-color:var(--pr);transform:translateY(-2px)}}
+
+/* Edukasi: buka-tutup yang jelas */
+details{border:1px solid var(--bd);border-radius:14px;padding:12px 14px;margin-bottom:8px;background:var(--card);transition:border-color .2s}
+details[open]{border-color:var(--pr)}
+summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 24px/1 var(--fb);color:var(--pr);transition:transform .3s var(--pop)}
+details[open] summary::after{transform:rotate(45deg)}
+details ul{margin:10px 0 0;padding-left:18px}
+details[open] ul{animation:open .35s var(--ease)}
+@keyframes open{from{opacity:0;transform:translateY(-6px)}}
+
+.warn{background:#d6454518;border:1px solid #d64545;border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:14px}
+
+/* Menu bawah dengan penanda yang bergeser */
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--bd);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:9}
+nav button{position:relative;flex:1;background:none;border:0;color:var(--mu);padding:9px 2px 8px;font:600 11px var(--fb);cursor:pointer;transition:color .2s}
+nav button::before{content:"";position:absolute;top:0;left:50%;width:30px;height:3px;border-radius:0 0 4px 4px;background:var(--pr);transform:translateX(-50%) scaleX(0);transition:transform .3s var(--ease)}
+nav button span{display:block;font-size:20px;transition:transform .3s var(--pop)}
+nav button.on{color:var(--pr);font-weight:700}
+nav button.on::before{transform:translateX(-50%) scaleX(1)}
+nav button.on span{transform:translateY(-2px) scale(1.18)}
+@media (hover:hover){nav button:not(.on):hover span{transform:translateY(-2px)}}
+@media (max-width:420px){nav button{font-size:10px}nav button span{font-size:18px}}
+
+.map{width:100%;border-radius:12px;border:1px solid var(--bd);background:var(--pr2);display:block}
+.map-box{height:320px;border-radius:16px;border:1px solid var(--bd);position:relative;z-index:0;background:var(--pr2)}
+.leaflet-container{font-family:var(--fb)}
+.photo{max-width:100%;border-radius:12px;margin-top:8px;max-height:180px}
+.leg{display:flex;flex-wrap:wrap;gap:8px 12px;font-size:12px;margin-top:8px}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+.login{min-height:70vh;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.login .logo{font-size:60px;animation:pop .7s var(--pop) backwards}
+@keyframes pop{from{opacity:0;transform:scale(.3) rotate(-20deg)}}
+
+/* Gerakan saat pindah tab dan saat digulir */
+.enter>*{animation:rise .38s var(--ease) backwards}
+.enter>:nth-child(2){animation-delay:.04s}.enter>:nth-child(3){animation-delay:.08s}.enter>:nth-child(4){animation-delay:.12s}
+.enter>:nth-child(5){animation-delay:.16s}.enter>:nth-child(6){animation-delay:.2s}.enter>:nth-child(n+7){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.enter .warn{animation:rise .38s var(--ease) backwards,nudge .6s .5s ease}
+@keyframes nudge{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* Hormati pengaturan "kurangi gerakan" */
+@media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ .rv{opacity:1;transform:none}
+}
